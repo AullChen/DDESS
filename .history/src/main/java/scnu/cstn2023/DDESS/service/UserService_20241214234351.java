@@ -1,7 +1,7 @@
 package scnu.cstn2023.DDESS.Service;
 
-import scnu.cstn2023.DDESS.DAO.UserMapper;
-import scnu.cstn2023.DDESS.Entity.User;
+import com.example.dataexchange.Dao.UserMapper;
+import com.example.dataexchange.entity.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

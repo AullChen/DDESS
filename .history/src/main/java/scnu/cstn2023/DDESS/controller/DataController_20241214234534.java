@@ -1,8 +1,8 @@
 package scnu.cstn2023.DDESS.Controller;
 
-import scnu.cstn2023.DDESS.Auth.JwtTokenProvider;
-import scnu.cstn2023.DDESS.Entity.UserData;
-import scnu.cstn2023.DDESS.Service.UserDataService;
+import scnu.cstn2023.DDESS.auth.JwtTokenProvider;
+import com.example.dataexchange.entity.UserData;
+import com.example.dataexchange.Service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
