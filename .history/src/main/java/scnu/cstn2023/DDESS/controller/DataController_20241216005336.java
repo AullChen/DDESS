@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.HashMap;
 import java.util.List;
 
 @RestController
@@ -40,13 +42,15 @@ public class DataController {
     @GetMapping("/alldata")
     public ResponseEntity<List<UserData>> getAllData(@RequestHeader("Authorization") String token) {
         try {
-            String jwtToken = token.substring(7); // 去掉 "Bearer "
-            int role = jwtTokenProvider.getRoleFromToken(jwtToken); // 获取角色信息
+            //String username = jwtTokenProvider.getUsernameFromToken(token.substring(7)); // 去掉 "Bearer "
+            int role = jwtTokenProvider.getRoleFromToken(token.substring(7)); // 获取角色信息
             if (role != 1) {
+                // 管理员可以查看所有数据
                 throw new BadCredentialsException("不是管理员，不能查看所有人信息！");
+            } else {
+                List<UserData> allData = userDataService.getAllData();
+                return ResponseEntity.ok(allData);
             }
-            List<UserData> allData = userDataService.getAllData();
-            return ResponseEntity.ok(allData);
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
         } catch (Exception e) {

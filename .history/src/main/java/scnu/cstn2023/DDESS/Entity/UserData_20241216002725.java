@@ -9,11 +9,5 @@ public class UserData {
     private String data;
 
     // Getters and Setters
-    public Long getUserId() {
-        return userId;
-    }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
-    }
 }

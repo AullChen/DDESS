@@ -2,6 +2,9 @@ package scnu.cstn2023.DDESS.DAO;
 
 import scnu.cstn2023.DDESS.Entity.UserData;
 import org.apache.ibatis.annotations.*;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
+
 import java.util.List;
 
 @Mapper

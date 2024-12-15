@@ -1,29 +1,17 @@
-import React from 'react';
-import { BrowserRouter as Router, Route, Routes, Navigate } from 'react-router-dom';
-import { Layout } from 'antd';
-import Home from './components/Home';
-import Login from './components/Login';
-import Register from './components/Register';
-import DataManagement from './components/DataManagement';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./pages/Home";
+import AuthPage from "./pages/AuthPage";
+import DataPage from "./pages/DataPage";
 
-const { Header, Content } = Layout;
-
-function App() {
-    return (
-        <Router>
-            <Layout>
-                <Header style={{ color: '#fff', textAlign: 'center' }}>数据交换与共享系统</Header>
-                <Content style={{ padding: '50px' }}>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/login" element={<Login />} />
-                        <Route path="/register" element={<Register />} />
-                        <Route path="/data" element={<DataManagement />} />
-                    </Routes>
-                </Content>
-            </Layout>
-        </Router>
-    );
-}
+const App = () => (
+  <Router>
+    <Routes>
+      <Route path="/" element={<Home />} />
+      <Route path="/auth" element={<AuthPage />} />
+      <Route path="/data" element={<DataPage />} />
+    </Routes>
+  </Router>
+);
 
 export default App;
