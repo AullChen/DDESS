@@ -21,7 +21,7 @@ public class JwtTokenProvider {
     }
 
     // 创建 JWT 令牌
-    public String createToken(String username, int role, Long user_id) {
+    public String createToken(String username, int role, int user_id) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
 
@@ -43,10 +43,10 @@ public class JwtTokenProvider {
     }
 
     // 从 JWT 中获取用户ID
-    public Long getUserIdFromToken(String token) {
+    public int getUserIdFromToken(String token) {
         Claims claims = parseClaims(token);
-        //return (Long) claims.get("user_id");
-        return Long.parseLong(claims.get("user_id").toString());
+        return (int) claims.get("user_id");
+        //return Interger.parseLong(claims.get("user_id"));
     }
 
 

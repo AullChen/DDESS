@@ -45,8 +45,7 @@ public class JwtTokenProvider {
     // 从 JWT 中获取用户ID
     public Long getUserIdFromToken(String token) {
         Claims claims = parseClaims(token);
-        //return (Long) claims.get("user_id");
-        return Long.parseLong(claims.get("user_id").toString());
+        return (Long) claims.get("user_id");
     }
 
 

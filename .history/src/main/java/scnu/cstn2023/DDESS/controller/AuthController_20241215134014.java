@@ -58,7 +58,7 @@ public class AuthController {
             String token = jwtTokenProvider.createToken(found.getUsername(), found.getRole(), found.getId());
 
             // 返回生成的 JWT 令牌
-            Map<String, String> response = new HashMap<>();
+            //Map<String, String> response = new HashMap<>();
             response.put("token", token);
             return ResponseEntity.ok(response);
         } catch (BadCredentialsException e) {

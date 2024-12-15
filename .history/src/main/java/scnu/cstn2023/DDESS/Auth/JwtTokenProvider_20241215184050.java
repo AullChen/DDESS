@@ -57,17 +57,17 @@ public class JwtTokenProvider {
     }
 
     // 验证 JWT 令牌
-    public boolean validateToken(String token) {
+    public static boolean validateToken(String token) {
         try {
             parseClaims(token);
-            return true;
-        } catch (JwtException | IllegalArgumentException e) {
-            return false;
-        }
-    }
-
-    // 解析 JWT 令牌的 Claims
-    private Claims parseClaims(String token) {
+                        return true;
+                    } catch (JwtException | IllegalArgumentException e) {
+                        return false;
+                    }
+                }
+            
+                // 解析 JWT 令牌的 Claims
+                private static Claims parseClaims(String token) {
         return Jwts.parserBuilder()
                 .setSigningKey(JWT_SECRET_KEY)
                 .build()

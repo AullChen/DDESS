@@ -57,7 +57,7 @@ public class JwtTokenProvider {
     }
 
     // 验证 JWT 令牌
-    public boolean validateToken(String token) {
+    public static boolean validateToken(String token) {
         try {
             parseClaims(token);
             return true;

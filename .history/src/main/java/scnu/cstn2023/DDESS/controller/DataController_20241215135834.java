@@ -24,9 +24,9 @@ public class DataController {
 
     // 上传数据
     @PostMapping("/upload")
-    public String uploadData(@RequestBody UserData userData, @RequestHeader("Authorization") String token) {
-        //Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
-        userDataService.uploadData(userData);
+    public String uploadData(@RequestHeader("Authorization") String token, @RequestBody UserData userData) {
+        Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
+        userDataService.uploadData(user_id, userData);
         return "Data uploaded successfully!";
     }
 
@@ -40,7 +40,7 @@ public class DataController {
     @GetMapping("/alldata")
     public ResponseEntity<List<UserData>> getAllData(@RequestHeader("Authorization") String token) {
         try {
-            //String username = jwtTokenProvider.getUsernameFromToken(token.substring(7)); // 去掉 "Bearer "
+            String username = jwtTokenProvider.getUsernameFromToken(token.substring(7)); // 去掉 "Bearer "
             int role = jwtTokenProvider.getRoleFromToken(token.substring(7)); // 获取角色信息
             if (role != 1) {
                 // 管理员可以查看所有数据

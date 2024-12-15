@@ -44,7 +44,7 @@ public class AuthController {
     private JwtTokenProvider jwtTokenProvider;
 
     @PostMapping("/login")
-    public ResponseEntity<Map<String, String>> login(@RequestBody User request) {
+    public String login(@RequestBody User request) {
         try {
             // 从数据库中加载用户信息
             User found = userService.getUserByUsername(request.getUsername());
@@ -58,9 +58,9 @@ public class AuthController {
             String token = jwtTokenProvider.createToken(found.getUsername(), found.getRole(), found.getId());
 
             // 返回生成的 JWT 令牌
-            Map<String, String> response = new HashMap<>();
-            response.put("token", token);
-            return ResponseEntity.ok(response);
+            //Map<String, String> response = new HashMap<>();
+            //response.put("token", token);
+            return token;
         } catch (BadCredentialsException e) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(Map.of("error", "Invalid credentials"));
         }

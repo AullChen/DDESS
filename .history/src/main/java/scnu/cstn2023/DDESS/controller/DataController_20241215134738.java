@@ -4,7 +4,6 @@ import scnu.cstn2023.DDESS.Auth.JwtTokenProvider;
 import scnu.cstn2023.DDESS.Entity.UserData;
 import scnu.cstn2023.DDESS.Service.UserDataService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +23,8 @@ public class DataController {
 
     // 上传数据
     @PostMapping("/upload")
-    public String uploadData(@RequestBody UserData userData, @RequestHeader("Authorization") String token) {
-        //Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
+    public String uploadData(@RequestHeader("Authorization") String token, @RequestBody UserData userData) {
+        Long 
         userDataService.uploadData(userData);
         return "Data uploaded successfully!";
     }
@@ -38,21 +37,20 @@ public class DataController {
 
     // 管理员查询所有数据
     @GetMapping("/alldata")
-    public ResponseEntity<List<UserData>> getAllData(@RequestHeader("Authorization") String token) {
+    public List<UserData> getAllData(@RequestHeader("Authorization") String token) {
         try {
-            //String username = jwtTokenProvider.getUsernameFromToken(token.substring(7)); // 去掉 "Bearer "
+            String username = jwtTokenProvider.getUsernameFromToken(token.substring(7)); // 去掉 "Bearer "
             int role = jwtTokenProvider.getRoleFromToken(token.substring(7)); // 获取角色信息
             if (role != 1) {
                 // 管理员可以查看所有数据
                 throw new BadCredentialsException("不是管理员，不能查看所有人信息！");
-            } else {
-                List<UserData> allData = userDataService.getAllData();
-                return ResponseEntity.ok(allData);
+            }
+
+            else {
+                return userDataService.getAllData();
             }
         } catch (BadCredentialsException e) {
-            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body(null);
-        } catch (Exception e) {
-            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(null);
+            return (List<UserData>) ResponseEntity.status(404).body(new HashMap<>());
         }
     }
 

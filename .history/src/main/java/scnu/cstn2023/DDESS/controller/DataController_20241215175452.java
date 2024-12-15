@@ -24,9 +24,10 @@ public class DataController {
 
     // 上传数据
     @PostMapping("/upload")
-    public String uploadData(@RequestBody UserData userData, @RequestHeader("Authorization") String token) {
-        //Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
-        userDataService.uploadData(userData);
+    @RequestHeader("Authorization") String token,
+    public String uploadData(@RequestBody UserData userData) {
+        Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
+        userDataService.uploadData(user_id, userData);
         return "Data uploaded successfully!";
     }
 

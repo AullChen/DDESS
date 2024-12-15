@@ -21,14 +21,13 @@ public class JwtTokenProvider {
     }
 
     // 创建 JWT 令牌
-    public String createToken(String username, int role, Long user_id) {
+    public String createToken(String username, int role, int userId) {
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + JWT_EXPIRATION);
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("user_id", 
-                        user_id)
+                .claim("role", role)
                 .claim("role", role) // 将角色信息添加到 JWT
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
@@ -41,14 +40,6 @@ public class JwtTokenProvider {
         Claims claims = parseClaims(token);
         return claims.getSubject();
     }
-
-    // 从 JWT 中获取用户ID
-    public Long getUserIdFromToken(String token) {
-        Claims claims = parseClaims(token);
-        //return (Long) claims.get("user_id");
-        return Long.parseLong(claims.get("user_id").toString());
-    }
-
 
     // 从 JWT 中获取角色
     public int getRoleFromToken(String token) {

@@ -11,7 +11,7 @@ import java.util.List;
 public interface UserDataMapper {
 
     @Insert("INSERT INTO user_data (userid, data) VALUES (#{user_id}, #{data})")
-    void insertData(UserData userData);
+    void insertData(Long user_id, UserData userData);
 
     @Select("SELECT * FROM user_data WHERE userid = #{user_id}")
     List<UserData> getDataByUser_id(Long user_id);

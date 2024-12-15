@@ -27,8 +27,8 @@ public class JwtTokenProvider {
 
         return Jwts.builder()
                 .setSubject(username)
-                .claim("user_id", 
-                        user_id)
+                .claim("userId", 
+                        user)
                 .claim("role", role) // 将角色信息添加到 JWT
                 .setIssuedAt(now)
                 .setExpiration(expiryDate)
@@ -43,10 +43,9 @@ public class JwtTokenProvider {
     }
 
     // 从 JWT 中获取用户ID
-    public Long getUserIdFromToken(String token) {
+    public int getUserIdFromToken(String token) {
         Claims claims = parseClaims(token);
-        //return (Long) claims.get("user_id");
-        return Long.parseLong(claims.get("user_id").toString());
+        return (int) claims.get("userId");
     }
 
 

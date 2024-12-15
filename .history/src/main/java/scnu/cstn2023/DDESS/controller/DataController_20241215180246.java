@@ -9,6 +9,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.web.bind.annotation.*;
 
+import com.auth0.jwt.JWT;
+
 import java.util.HashMap;
 import java.util.List;
 
@@ -25,8 +27,8 @@ public class DataController {
     // 上传数据
     @PostMapping("/upload")
     public String uploadData(@RequestBody UserData userData, @RequestHeader("Authorization") String token) {
-        //Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
-        userDataService.uploadData(userData);
+        Long user_id = jwtTokenProvider.getUserIdFromToken(token.substring(7));
+        userDataService.uploadData(user_id, userData);Servlet.service() for servlet [dispatcherServlet] in context with path [] threw exception [Request processing failed: io.jsonwebtoken.security.SignatureException: JWT signature does not match locally computed signature. JWT validity cannot be asserted and should not be trusted.] with root cause
         return "Data uploaded successfully!";
     }
 

@@ -55,7 +55,7 @@ public class AuthController {
             }
 
             // 生成 JWT 令牌
-            String token = jwtTokenProvider.createToken(found.getUsername(), found.getRole(), found.getId());
+            String token = jwtTokenProvider.createToken(found.getUsername(), found.getRole(), );
 
             // 返回生成的 JWT 令牌
             Map<String, String> response = new HashMap<>();
